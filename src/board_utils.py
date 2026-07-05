@@ -24,20 +24,25 @@ class Utils:
         return "X"
 
     @classmethod
+    def next_player(cls, player):
+        if player == "X":
+            return "O"
+        
+        return "X"
+
+    @classmethod
     def result(cls, action, board: list):
         row = action[0] - 1        
         col = action[1] - 1
-
 
         player = cls.player(board)
         new_board = board.copy()
 
         if new_board[row][col] == "?":
             new_board[row][col] = player
-        else:
-            return None
+            return new_board
 
-        return new_board
+        return None
 
     @classmethod
     def winner(cls, board: list):
@@ -91,3 +96,13 @@ class Utils:
             print()
 
         print()
+
+    @classmethod
+    def flatten(cls, board: list):
+        state = []
+
+        for row in board:
+            for col in row:
+                state.append(col)
+
+        return state
