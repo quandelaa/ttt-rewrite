@@ -5,8 +5,10 @@ from board_utils import Utils
 def train(n):
     bot = Bot()
 
+    checkups = n / 10
+
     for i in range(n):
-        if (i+1) % 50000 == 0:
+        if (i+1) % checkups == 0:
             print("training match", i+1)
 
         board = Board()
@@ -63,7 +65,7 @@ def train(n):
                     0
                 )
 
-    print("done training")
+    print("\ndone training")
     return bot
 
 def play(bot):
@@ -121,10 +123,22 @@ def play(bot):
     else:
         print("tie")
 
+    print()
+
 def main():
-    bot = train(1000000)
+    while True:
+        try:
+            raw_n = int(input("amount of training matches: "))
+        except ValueError as e:
+            print(e, "\n")
+            continue
+
+        break
+
+    bot = train(raw_n)
     
-    play(bot)
+    while True:
+        play(bot)
 
 if __name__ == "__main__":
     main()
